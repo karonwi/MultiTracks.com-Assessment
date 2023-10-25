@@ -1,0 +1,12 @@
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\bin\Debug\net5.0\MTDTO.deps.json
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\bin\Debug\net5.0\MTDTO.dll
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\bin\Debug\net5.0\ref\MTDTO.dll
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\bin\Debug\net5.0\MTDTO.pdb
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.csproj.AssemblyReference.cache
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.AssemblyInfoInputs.cache
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.AssemblyInfo.cs
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.csproj.CoreCompileInputs.cache
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.dll
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\ref\MTDTO.dll
+C:\Users\skaronwi\Documents\Troj\Multi\.net\MTDTO\obj\Debug\net5.0\MTDTO.pdb
