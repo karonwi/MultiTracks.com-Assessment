@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,48 +26,75 @@ namespace Services.Implementations
 
         public async Task<Response<CreateArtistDto>> GetArtistByNameAsync(string name)
         {
-            var artist =await _artistRepo.GetByNameAsync(name);
-            var mappedResult = MapEntityArtistToDto(artist);
-            if (artist != null)
+            try
             {
+                var artist = await _artistRepo.GetByNameAsync(name);
+                var mappedResult = MapEntityArtistToDto(artist);
+                if (artist != null)
+                {
+                    return new Response<CreateArtistDto>()
+                    {
+                        Data = mappedResult,
+                        Message = "Success",
+                        Success = true
+
+                    };
+                }
                 return new Response<CreateArtistDto>()
                 {
-                    Data = mappedResult,
-                    Message = "Success",
-                    Success = true
+                    Errors = "Error fetching artist",
+                    Message = "Unsuccessful attempt",
+                    Success = false
 
                 };
             }
-            return new Response<CreateArtistDto>()
+            catch (Exception x)
             {
-                Errors = "Error fetching artist",
-                Message = "Unsuccess attempt",
-                Success = false
-
-            };
+                return new Response<CreateArtistDto>()
+                {
+                    Data = null,
+                    Errors = HttpStatusCode.InternalServerError.ToString(),
+                    Message = x.Message,
+                    Success = false
+                };
+            }
+            
         }
 
         public async Task<Response<int>> AddArtistAsync(CreateArtistDto artist)
         {
-            var newArtist = MapDtoToEntity(artist);
-            var artiste = await _artistRepo.AddAsync(newArtist);
-            if (artiste>1)
+            try
+            {
+                var newArtist = MapDtoToEntity(artist);
+                var artiste = await _artistRepo.AddAsync(newArtist);
+                if (artiste > 1)
+                {
+                    return new Response<int>()
+                    {
+                        Message = "Successfully Created New Artist",
+                        Success = true,
+                        Data = artiste
+                    };
+
+                }
+
+                return new Response<int>()
+                {
+                    Errors = "Error adding new Artist",
+                    Message = "Unsuccessful",
+                    Success = false
+                };
+            }
+            catch (Exception exception)
             {
                 return new Response<int>()
                 {
-                    Message = "Successfully Created New Artist",
-                    Success = true,
-                    Data = artiste
+                    Errors = HttpStatusCode.InternalServerError.ToString(),
+                    Message = exception.Message,
+                    Success = false
                 };
-                
             }
-
-            return new Response<int>()
-            {
-                Errors = "Error adding new Artist",
-                Message = "Unsuccessful",
-                Success = false
-            };
+            
         }
 
         private  CreateArtistDto MapEntityArtistToDto(Artist artist)

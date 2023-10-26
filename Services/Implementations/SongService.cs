@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -22,23 +24,37 @@ namespace Services.Implementations
         }
         public async Task<Response<IEnumerable<GetSongsDto>>> ListSongsPaginatedAsync(int pageSize, int pageNumber)
         {
-            var songs = await _songRepo.ListPaginatedAsync(pageNumber, pageSize);
-            var mappedResult = MapEntityToDto(songs);
-            if (songs!=null)
+            try
+            {
+                var songs = await _songRepo.ListPaginatedAsync(pageNumber, pageSize);
+                var mappedResult = MapEntityToDto(songs);
+                if (songs != null)
+                {
+                    return new Response<IEnumerable<GetSongsDto>>()
+                    {
+                        Data = mappedResult,
+                        Message = "Successfully gotten songs",
+                        Success = true
+                    };
+                }
+                return new Response<IEnumerable<GetSongsDto>>()
+                {
+                    Errors = "Couldn't get songs",
+                    Message = "Unsuccessful",
+                    Success = false
+                };
+            }
+            catch (Exception exception)
             {
                 return new Response<IEnumerable<GetSongsDto>>()
                 {
-                    Data = mappedResult,
-                    Message = "Successfully gotten songs",
-                    Success = true
+                    Errors = HttpStatusCode.InternalServerError.ToString(),
+                    Message = exception.Message,
+                    Success = false
                 };
+                
             }
-            return new Response<IEnumerable<GetSongsDto>>()
-            {
-                Errors = "Couldn't get songs",
-                Message = "Unsuccessful",
-                Success = false
-            };
+            
         }
 
         private IEnumerable<GetSongsDto> MapEntityToDto(IEnumerable<Song> songs)
